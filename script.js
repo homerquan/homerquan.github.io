@@ -77,8 +77,8 @@ const models = [
     transfer: {
       position: { x: 0, y: 0, z: 2 },
       rotation: {
-        x: Math.PI / 5,
-        y: Math.PI / 5,
+        x: 0,
+        y: Math.PI / 2,
         z: 0,
       }
     }
