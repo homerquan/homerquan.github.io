@@ -73,7 +73,7 @@ const clock         = new THREE.Clock();
 const models = [
   {
     file: 'network.glb',
-    scale: 0.05,
+    scale: 0.8,
     transfer: {
       position: { x: 0, y: 0, z: 2 },
       rotation: {
