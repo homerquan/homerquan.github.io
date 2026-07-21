@@ -4,156 +4,709 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homer Quan</title>
-  <meta name="description" content="Homer Quan builds practical deep tech systems across NeuronSymbolic AI, physical models, graph analysis, autonomous robotics, and industrial intelligence." />
-  <meta name="keywords" content="Homer Quan, NeuronSymbolic, Physical Models, Graph Analysis, Deep Tech, Smart Manufacturing, Autonomous Robotics, Data-Driven Logistics, Industrial Intelligence" />
+  <meta name="theme-color" content="#070b12" />
+  <title>Homer Quan — A Chronicle of Systems and Intelligence</title>
+  <meta name="description" content="The continuing story of Homer Quan’s work across software, knowledge systems, human-AI collaboration, and machines in the physical world." />
   <meta name="author" content="Homer Quan" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Homer Quan | Deep Tech and AI Systems" />
-  <meta property="og:description" content="Personal site of Homer Quan focused on NeuronSymbolic AI, robotics, manufacturing, and industrial intelligence." />
+  <link rel="canonical" href="https://homerquan.github.io/" />
+  <meta property="og:title" content="Homer Quan — A Chronicle of Systems and Intelligence" />
+  <meta property="og:description" content="Notes from a long journey through software, knowledge, machines, and human judgment." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://homerquan.com/" />
+  <meta property="og:url" content="https://homerquan.github.io/" />
+  <meta property="og:image" content="https://homerquan.github.io/public/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Homer Quan — A chronicle of systems and intelligence" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://homerquan.github.io/public/og.png" />
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap');
+
     :root {
-      --bg: #03050a;
-      --text: #e9ecff;
-      --muted: #a7b2d4;
-      --accent: #9fd4ff;
-      --accent-2: #c8f5ff;
-      --glass: rgba(8, 14, 30, 0.55);
+      --night: #070b12;
+      --night-soft: #0d1420;
+      --parchment: #e9e2d2;
+      --parchment-deep: #dcd2bd;
+      --ink: #25251f;
+      --ink-soft: #5c594f;
+      --cream: #f3eddf;
+      --faded: #b8b1a2;
+      --gold: #b89a65;
+      --sea: #789a99;
+      --night-line: rgba(232, 222, 199, 0.2);
+      --paper-line: rgba(57, 53, 43, 0.2);
+      --max: 1100px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html,
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 78px;
+      background: var(--night);
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: radial-gradient(circle at 20% 20%, #0c1635 0%, var(--bg) 45%, #020308 100%);
-      color: var(--text);
-      font-family: "Space Grotesk", sans-serif;
+      min-width: 320px;
+      color: var(--cream);
+      background: var(--night);
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 5px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 50;
+      padding: 9px 13px;
+      color: var(--night);
+      background: var(--parchment);
+      transform: translateY(-170%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
     }
 
     #hero {
       position: fixed;
       inset: 0;
       z-index: 0;
-      width: 100%;
-      height: 100%;
       overflow: hidden;
+      pointer-events: none;
     }
 
     #hero canvas {
       display: block;
       width: 100%;
       height: 100%;
+      opacity: 0.65;
+      filter: sepia(0.18) saturate(0.72);
     }
 
-    .overlay {
+    #hero::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        radial-gradient(circle at 76% 42%, transparent 0, rgba(7, 11, 18, 0.15) 32%, rgba(7, 11, 18, 0.84) 76%),
+        linear-gradient(90deg, rgba(7, 11, 18, 0.98) 0%, rgba(7, 11, 18, 0.8) 54%, rgba(7, 11, 18, 0.18) 100%);
+    }
+
+    .page {
       position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      pointer-events: auto;
+      z-index: 1;
     }
 
-    .card {
-      width: min(760px, 92vw);
-      border: 1px solid rgba(180, 211, 255, 0.2);
-      background: linear-gradient(140deg, var(--glass), rgba(9, 11, 22, 0.46));
-      backdrop-filter: blur(6px);
-      border-radius: 18px;
-      padding: clamp(20px, 3vw, 34px);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    .shell {
+      width: min(calc(100% - 48px), var(--max));
+      margin-inline: auto;
+    }
+
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100svh;
+      padding: 90px 0 70px;
+      text-align: center;
+    }
+
+    .chapter-label,
+    .folio,
+    .aside-title {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 0.69rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+    }
+
+    .chapter-label,
+    .aside-title {
+      color: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-weight: 400;
     }
 
     h1 {
-      margin: 0 0 14px 0;
-      font-size: clamp(2rem, 7vw, 4.8rem);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: #f7fbff;
-      text-shadow: 0 0 28px rgba(169, 222, 255, 0.22);
-      animation: floatTitle 5s ease-in-out infinite;
+      margin: 0;
+      color: var(--parchment);
+      font-size: clamp(4rem, 11.5vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-shadow: 0 2px 28px rgba(184, 154, 101, 0.12);
     }
 
-    .tags {
+    .hero-rule {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
+      align-items: center;
+      width: min(100%, 930px);
+      gap: 15px;
+      margin: 48px auto 42px;
     }
 
-    .tag {
-      border: 1px solid rgba(173, 235, 255, 0.36);
-      border-radius: 999px;
-      padding: 8px 13px;
-      font-size: clamp(0.78rem, 1.5vw, 0.98rem);
-      color: var(--accent-2);
-      background: rgba(12, 20, 45, 0.42);
-      box-shadow: inset 0 0 10px rgba(159, 212, 255, 0.1);
-      animation: drift 6s ease-in-out infinite;
+    .hero-rule::before,
+    .hero-rule::after {
+      height: 1px;
+      flex: 1;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--gold));
     }
 
-    .tag:nth-child(2n) {
-      animation-delay: 0.8s;
+    .hero-rule::after {
+      background: linear-gradient(90deg, var(--gold), transparent);
     }
 
-    .tag:nth-child(3n) {
-      animation-delay: 1.6s;
+    .ornament {
+      position: relative;
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .ornament::after {
+      position: absolute;
+      inset: 6px;
+      border: 1px solid var(--gold);
+      content: "";
+    }
+
+    .hero-subtitle {
+      margin-bottom: 0;
+      color: var(--sea);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: clamp(1rem, 2.5vw, 1.55rem);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .hero-place {
+      margin: 25px 0 0;
+      color: var(--gold);
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px;
+      color: var(--faded);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .hero-scroll:hover {
+      color: var(--cream);
+    }
+
+    .paper {
+      position: relative;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(80, 69, 46, 0.025) 1px, transparent 1px),
+        var(--parchment);
+      background-size: 100% 34px;
+    }
+
+    .paper::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: 0.23;
+      background: radial-gradient(circle at 12% 12%, rgba(121, 98, 54, 0.16), transparent 30%), radial-gradient(circle at 88% 72%, rgba(80, 93, 75, 0.11), transparent 28%);
+    }
+
+    .chronicle {
+      padding: 126px 0;
+    }
+
+    .book {
+      position: relative;
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: clamp(34px, 7vw, 86px);
+      padding: 94px 0;
+      border-top: 1px solid var(--paper-line);
+    }
+
+    .book:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .folio {
+      position: sticky;
+      top: 108px;
+      align-self: start;
+      color: #766f61;
+    }
+
+    .folio strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #896d3e;
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .book-heading {
+      margin-bottom: 38px;
+    }
+
+    .book-heading h2 {
+      max-width: 780px;
+      margin: 10px 0 16px;
+      font-size: clamp(2.8rem, 5.6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .book-deck {
+      max-width: 670px;
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.22rem;
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .prose {
+      max-width: 760px;
+      color: #45443d;
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: clamp(1.14rem, 2vw, 1.3rem);
+      line-height: 1.72;
+    }
+
+    .prose p:first-child::first-letter {
+      float: left;
+      margin: 7px 9px 0 0;
+      color: #896d3e;
+      font-size: 4.4rem;
+      line-height: 0.7;
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .night-section {
+      position: relative;
+      background: rgba(7, 11, 18, 0.91);
+      backdrop-filter: blur(9px);
+    }
+
+    .marginalia {
+      padding: 128px 0;
+    }
+
+    .marginalia-head {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: clamp(34px, 7vw, 86px);
+      margin-bottom: 58px;
+    }
+
+    .marginalia h2 {
+      max-width: 730px;
+      margin: 10px 0 0;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+    }
+
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 1px solid var(--night-line);
+    }
+
+    .evidence-table th {
+      padding: 13px 20px 13px 0;
+      border-bottom: 1px solid var(--night-line);
+      color: var(--gold);
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 0.64rem;
+      font-weight: 600;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .evidence-table td {
+      padding: 30px 24px 32px 0;
+      border-bottom: 1px solid var(--night-line);
+      vertical-align: top;
+    }
+
+    .evidence-table th:first-child,
+    .evidence-table td:first-child {
+      width: 25%;
+    }
+
+    .evidence-table th:last-child,
+    .evidence-table td:last-child {
+      width: 14%;
+      padding-right: 0;
+      text-align: right;
+    }
+
+    .evidence-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cream);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .evidence-role {
+      color: var(--faded);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .evidence-table p {
+      max-width: 690px;
+      margin-bottom: 0;
+      color: var(--faded);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .evidence-link {
+      display: inline-block;
+      padding-bottom: 3px;
+      border-bottom: 1px solid currentColor;
+      color: var(--gold);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .evidence-link:hover {
+      color: var(--cream);
+    }
+
+    .side-studies {
+      margin-top: 96px;
+    }
+
+    .side-studies-head {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: clamp(34px, 7vw, 86px);
+      margin-bottom: 34px;
+    }
+
+    .side-studies h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1;
+      letter-spacing: -0.025em;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--night-line);
+      border-left: 1px solid var(--night-line);
+    }
+
+    .study {
+      position: relative;
+      min-height: 190px;
+      padding: 25px 54px 26px 27px;
+      border-right: 1px solid var(--night-line);
+      border-bottom: 1px solid var(--night-line);
+      text-decoration: none;
+      transition: background 160ms ease;
+    }
+
+    .study:hover {
+      background: rgba(232, 222, 199, 0.05);
+    }
+
+    .study-number {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--gold);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .study h4 {
+      margin: 0 0 7px;
+      color: var(--cream);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+
+    .study p {
+      margin: 0;
+      color: var(--faded);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1rem;
+      line-height: 1.48;
+    }
+
+    .study-meta {
+      display: block;
+      margin-top: 16px;
+      color: #7f7c73;
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 0.64rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .study-arrow {
+      position: absolute;
+      top: 25px;
+      right: 27px;
+      color: var(--gold);
+    }
+
+    .epilogue {
+      padding: 132px 0 86px;
+      text-align: center;
+    }
+
+    .epilogue::before {
+      display: block;
+      width: 80px;
+      height: 1px;
+      margin: 0 auto 38px;
+      content: "";
+      background: var(--gold);
+      box-shadow: -12px 0 0 -4px var(--night), -12px 0 0 -3px var(--gold), 12px 0 0 -4px var(--night), 12px 0 0 -3px var(--gold);
+    }
+
+    .epilogue h2 {
+      max-width: 780px;
+      margin: 14px auto 26px;
+      font-size: clamp(3.3rem, 7.5vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+    }
+
+    .epilogue p {
+      max-width: 640px;
+      margin: 0 auto 34px;
+      color: var(--faded);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.2rem;
+    }
+
+    .letter-link {
+      display: inline-block;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 1.18rem;
+      text-decoration: none;
+    }
+
+    .letter-link:hover {
+      color: var(--cream);
     }
 
     .socials {
       display: flex;
-      gap: 16px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 42px;
+      color: #8f8a80;
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 0.96rem;
     }
 
     .socials a {
-      color: var(--accent);
       text-decoration: none;
-      font-size: 0.92rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border-bottom: 1px solid transparent;
-      transition: border-color 180ms ease, color 180ms ease;
     }
 
     .socials a:hover {
-      color: #e9f9ff;
-      border-color: rgba(233, 249, 255, 0.9);
+      color: var(--cream);
     }
 
-    @keyframes floatTitle {
-      0%,
-      100% {
-        transform: translateY(0);
+    @media (max-width: 860px) {
+      #hero::after {
+        background: linear-gradient(180deg, rgba(7, 11, 18, 0.42), rgba(7, 11, 18, 0.88) 68%, var(--night));
       }
-      50% {
-        transform: translateY(-6px);
+
+      .book,
+      .marginalia-head,
+      .side-studies-head {
+        grid-template-columns: 105px minmax(0, 1fr);
+        gap: 32px;
+      }
+
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(calc(100% - 30px), var(--max));
+      }
+
+      .hero-section {
+        min-height: 100svh;
+        padding: 72px 0 64px;
+      }
+
+      h1 {
+        font-size: clamp(3.25rem, 16vw, 5.5rem);
+        white-space: normal;
+      }
+
+      .hero-rule {
+        margin: 34px auto 31px;
+      }
+
+      .hero-subtitle {
+        max-width: 320px;
+        line-height: 1.5;
+      }
+
+      .chronicle,
+      .marginalia {
+        padding: 88px 0;
+      }
+
+      .book,
+      .marginalia-head,
+      .side-studies-head {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .folio {
+        position: static;
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+      }
+
+      .folio strong {
+        display: inline;
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .book {
+        padding: 72px 0;
+      }
+
+      .evidence-table,
+      .evidence-table tbody,
+      .evidence-table tr,
+      .evidence-table td {
+        display: block;
+      }
+
+      .evidence-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      .evidence-table tr {
+        padding: 27px 0 30px;
+        border-bottom: 1px solid var(--night-line);
+      }
+
+      .evidence-table td,
+      .evidence-table td:first-child,
+      .evidence-table td:last-child {
+        width: auto;
+        padding: 0;
+        border: 0;
+        text-align: left;
+      }
+
+      .evidence-table td + td {
+        margin-top: 15px;
+      }
+
+      .side-studies {
+        margin-top: 72px;
+      }
+
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .epilogue {
+        padding-top: 100px;
       }
     }
 
-    @keyframes drift {
-      0%,
-      100% {
-        transform: translateY(0) scale(1);
-        border-color: rgba(173, 235, 255, 0.36);
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
-      50% {
-        transform: translateY(-3px) scale(1.02);
-        border-color: rgba(216, 248, 255, 0.7);
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
   <script type="importmap">
   {
     "imports": {
@@ -168,50 +721,234 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Homer Quan",
-    "jobTitle": "AI and Deep Tech Leader",
-    "description": "Homer Quan focuses on NeuronSymbolic systems, physical models, graph analysis, smart manufacturing, and autonomous robotics.",
-    "knowsAbout": [
-      "NeuronSymbolic",
-      "Physical Models",
-      "Graph Analysis",
-      "Deep Tech",
-      "Smart Manufacturing",
-      "Autonomous Robotics",
-      "Data-Driven Logistics",
-      "Industrial Intelligence"
-    ],
-    "sameAs": [
-      "https://twitter.com/homerquan",
-      "https://github.com/homerquan",
-      "https://huggingface.co/homerquan"
-    ]
+    "url": "https://homerquan.github.io/",
+    "jobTitle": "AI Systems Architect and Technical Leader",
+    "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY" },
+    "knowsAbout": ["Human-AI Collaboration", "Physical AI", "On-edge AI", "Agentic AI", "Knowledge Graphs", "Ontology", "Neurosymbolic Systems", "Real-time Decision Systems", "Robotics", "Responsible AI"],
+    "sameAs": ["https://github.com/homerquan", "https://huggingface.co/homerquan", "https://www.linkedin.com/in/homerquan/"]
   }
   </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to the chronicle</a>
   <div id="hero" aria-hidden="true"></div>
-  <main class="overlay">
-    <section class="card">
-      <h1>Homer Quan</h1>
-      <div class="tags" aria-label="Highlighted interests">
-        <span class="tag">NeuronSymbolic</span>
-        <span class="tag">Physical Models</span>
-        <span class="tag">Graph Analysis</span>
-        <span class="tag">Space Tech</span>
-        <span class="tag">Smart Manufacturing</span>
-        <span class="tag">Autonomous Robotics</span>
-        <span class="tag">Data-Driven Logistics</span>
-        <span class="tag">Industrial Intelligence</span>
-      </div>
-      <nav class="socials" aria-label="Social links">
-        <a href="https://twitter.com/homerquan" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-        <a href="https://github.com/homerquan" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://huggingface.co/homerquan" target="_blank" rel="noopener noreferrer">Hugging Face</a>
-        <a href="https://www.linkedin.com/in/homerquan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </nav>
-    </section>
-  </main>
+
+  <div class="page">
+    <main id="main">
+      <section class="hero-section shell" id="prologue">
+        <h1>Homer Quan</h1>
+        <div class="hero-rule" aria-hidden="true"><span class="ornament"></span></div>
+        <p class="hero-subtitle">A chronicle of systems and intelligence</p>
+        <p class="hero-place">New York · MMXXVI</p>
+        <a class="hero-scroll" href="#home">Turn the page ↓</a>
+      </section>
+
+      <section class="paper">
+        <div class="chronicle shell">
+          <article class="book" id="home">
+            <div class="folio"><strong>·</strong> Prologue</div>
+            <div>
+              <header class="book-heading">
+                <span class="chapter-label">Before the journey</span>
+                <h2>Home is the compass</h2>
+                <p class="book-deck">Every odyssey is measured not only by how far one travels, but by what one learns to carry home.</p>
+              </header>
+              <div class="prose">
+                <p>I live in New York City with my wife and our two children. They are the fixed point in a life that has crossed countries, companies, ideas, and more than a few uncertain experiments. Work matters to me, but it is not the center of the story. Home is.</p>
+                <p>That perspective shapes how I approach technology. The objective is not intelligence in isolation, but systems that strengthen human agency and produce meaningful outcomes in the environments where people actually work.</p>
+                <p>My work is driven by a simple belief: AI should help people think more clearly, learn faster, coordinate better, and act with confidence in complex environments. The chapters that follow trace how that belief has taken form in knowledge systems, products, teams, and machines.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book" id="book-one">
+            <div class="folio"><strong>I</strong> Knowledge</div>
+            <div>
+              <header class="book-heading">
+                <span class="chapter-label">Book the First</span>
+                <h2>Knowledge, ontology, and decisions in motion</h2>
+                <p class="book-deck">Making complex domains explicit enough for people and machines to reason about them together.</p>
+              </header>
+              <div class="prose">
+                <p>A recurring theme in my work is the representation of knowledge: how entities, events, rules, evidence, and human intent can be organized into a model of a domain. At Yahoo, this took the form of graph entity search, large-scale graph data pipelines, and language-driven content analysis. The same foundations support applications such as intelligent analysis, content integrity, and fake-news detection, where isolated signals matter less than their provenance and relationships.</p>
+                <p>Knowledge graphs and ontologies provide explicit structure; neural models contribute perception and pattern recognition; symbolic rules add constraints and explanations. I am particularly interested in this neurosymbolic combination because it supports reasoning that is both capable and auditable.</p>
+                <p>At Wise Systems, that structure became a real-time decision engine for routing vehicles through live traffic, telemetry, predictions, and operational constraints. At Reflen, it represented expert behavior and feedback. The pattern is similar to operational decision platforms such as Palantir AIP: connect domain ontology, live data, models, policy, and human approval so decisions can be understood and acted upon.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book" id="book-two">
+            <div class="folio"><strong>II</strong> Building</div>
+            <div>
+              <header class="book-heading">
+                <span class="chapter-label">Book the Second</span>
+                <h2>From first concept to a working system</h2>
+                <p class="book-deck">The work is not complete when an idea is explained. It must be built, used, tested, and sustained by a team.</p>
+              </header>
+              <div class="prose">
+                <p>Much of my work begins at zero: an ambiguous problem, a technical possibility, and no established path between them. I translate that possibility into an architecture, build the highest-risk components, connect them into an application, and establish the operational foundations required for production.</p>
+                <p>The progression moves from concept and prototype to product and platform. It may involve an agent workflow, a graph service, a voice pipeline, a simulator bridge, or an end-to-end application. The specific component matters, but so do the interfaces between components—the places where data, models, users, and operational constraints meet.</p>
+                <p>Building also means creating the culture and team around the system. Clear technical principles, shared ownership, direct feedback, and disciplined experimentation allow a small team to move quickly without sacrificing reliability. My role is hands-on: clarify the problem, make the first version real, and help the team develop the judgment to carry it forward.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book" id="book-three">
+            <div class="folio"><strong>III</strong> Judgment</div>
+            <div>
+              <header class="book-heading">
+                <span class="chapter-label">Book the Third</span>
+                <h2>Systems that listen before they act</h2>
+                <p class="book-deck">As software becomes more capable, responsibility moves from a policy document into the architecture itself.</p>
+              </header>
+              <div class="prose">
+                <p>Pajama Cats began close to home: with children, books, and the possibility that a story might listen as well as speak. We built voice, language-model, content, and mobile components into an interactive application while treating age-appropriate boundaries, privacy, validation, refusals, and parent controls as product requirements.</p>
+                <p>Later, the setting changed to enterprise compliance. Policies, structured records, unstructured documents, communication history, retrieval, and model reasoning had to converge in a workflow that preserved reviewer authority. Across both contexts, the principle was consistent: AI may propose, summarize, and reason, but consequential decisions need traceability, explicit constraints, and a clear path for human intervention.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="book" id="book-four">
+            <div class="folio"><strong>IV</strong> Physical AI</div>
+            <div>
+              <header class="book-heading">
+                <span class="chapter-label">Book the Fourth</span>
+                <h2>Intelligence at the edge of the physical world</h2>
+                <p class="book-deck">When AI must perceive, decide, and coordinate with machines in real time, software infrastructure becomes part of the physical system.</p>
+              </header>
+              <div class="prose">
+                <p>At SP8CEAI, I led the architecture of human-robot workflows for space and industrial operations. The physical AI stack connected language-model agents, procedure understanding, symbolic checks, ROS execution, Omniverse simulation, AR/VR review, and operator approval into an auditable path from plan to action.</p>
+                <p>On-edge AI introduces a different set of engineering constraints: inference latency, intermittent connectivity, device coordination, privacy, resilience, limited compute, and safe failure modes. It requires more than deploying a model to hardware. The surrounding infrastructure must manage tasks, state, model routing, checkpoints, observability, and human control across local devices, robots, simulators, and private compute.</p>
+                <p>MirrorNeuron explores the software side of that problem. Its local-first runtime treats retries, approvals, sleep and resume, and portable execution as core primitives. Together, these efforts point toward AI systems that can operate close to the work while remaining inspectable, recoverable, and governed by the people responsible for the outcome.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="night-section" id="marginalia">
+        <div class="marginalia shell">
+          <header class="marginalia-head">
+            <span class="chapter-label">Selected work</span>
+            <h2>The systems behind the chronicle</h2>
+          </header>
+
+          <table class="evidence-table">
+            <thead>
+              <tr><th scope="col">Project</th><th scope="col">What it demonstrates</th><th scope="col">Link</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="evidence-title">MirrorNeuron</span><span class="evidence-role">Creator</span></td>
+                <td><p>I am building an open-source AI workflow runtime for reliable execution on a single PC or private swarm cluster. The platform focuses on deterministic orchestration, fault recovery, checkpoints, distributed execution, human approvals, local and private deployment, and long-running agentic workflows. It is designed to make AI systems reliable enough for production rather than only for demonstrations.</p></td>
+                <td><a class="evidence-link" href="https://www.mirrorneuron.io/" target="_blank" rel="noopener noreferrer">Visit project ↗</a></td>
+              </tr>
+              <tr>
+                <td><span class="evidence-title">SP8CEAI</span><span class="evidence-role">CTO</span></td>
+                <td><p>I helped build an AI platform for satellite pre-launch preparation, combining AI agents, digital twins, simulation, robotics workflows, and human-in-the-loop operational review. Building these systems required reliable workflow execution, operational tooling, and infrastructure for complex engineering processes.</p></td>
+                <td><a class="evidence-link" href="https://vimeo.com/1130218954/7d3e500559" target="_blank" rel="noopener noreferrer">Watch demo ↗</a></td>
+              </tr>
+              <tr>
+                <td><span class="evidence-title">Pajama Cats Media</span><span class="evidence-role">Founder</span></td>
+                <td><p>I built an AI-driven children’s book platform for children with autism, taking it from a Carnegie Mellon University research project into a product launched on the App Store and Google Play.</p></td>
+                <td><a class="evidence-link" href="https://www.youtube.com/watch?v=e0UtkJVB1S4" target="_blank" rel="noopener noreferrer">Watch story ↗</a></td>
+              </tr>
+              <tr>
+                <td><span class="evidence-title">Wise Systems MVP</span><span class="evidence-role">Chief Architect</span></td>
+                <td><p>I helped build the original Wise Systems MVP for turn-by-turn route optimization. The system combined graph-based vehicle routing, live traffic, telemetry, predictive models, and operational constraints to continuously update decisions as conditions changed in the field.</p></td>
+                <td><a class="evidence-link" href="https://www.wisesystems.com" target="_blank" rel="noopener noreferrer">Visit company ↗</a></td>
+              </tr>
+              <tr>
+                <td><span class="evidence-title">Lunar Aspect</span><span class="evidence-role">AI Consultant</span></td>
+                <td><p>I designed an AI auditing and decision-support system that could evaluate both explicit factors—policies, structured records, and declared constraints—and implicit factors such as context, communication history, precedent, and reviewer judgment. The workflow combined retrieval, agent orchestration, validation, and human review for high-reliability enterprise decisions.</p></td>
+                <td><a class="evidence-link" href="https://lunaraspect.com" target="_blank" rel="noopener noreferrer">Visit company ↗</a></td>
+              </tr>
+              <tr>
+                <td><span class="evidence-title">Yahoo Search Entity Graph</span><span class="evidence-role">Software Engineer</span></td>
+                <td><p>Before the LLM era, I worked on the design of a graph-based question-and-answer search experience and the data platform behind it. The system connected entities, relationships, natural-language classification, and large-scale ingestion so search could return structured knowledge rather than only a list of documents.</p></td>
+                <td><a class="evidence-link" href="https://www.yahooinc.com/research/research-areas/knowledge-graphs" target="_blank" rel="noopener noreferrer">Research context ↗</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <section class="side-studies" aria-labelledby="side-studies-title">
+            <header class="side-studies-head">
+              <span class="chapter-label">Side studies</span>
+              <h3 id="side-studies-title">Experimental hobby projects</h3>
+            </header>
+
+            <div class="study-grid">
+              <a class="study" href="https://github.com/homerquan/BioTarget" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">i.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>BioTarget</h4>
+                <p>A drug-discovery prototype exploring AI-assisted target and molecular analysis.</p>
+                <span class="study-meta">Python · Public repository</span>
+              </a>
+              <a class="study" href="https://github.com/homerquan/ApronAI" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">ii.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>ApronAI</h4>
+                <p>A rapid AI prototype created as part of a Devpost hackathon.</p>
+                <span class="study-meta">Python · Public repository</span>
+              </a>
+              <a class="study" href="https://github.com/homerquan/Archmind" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">iii.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>Archmind</h4>
+                <p>An experiment in software architecture analysis and system understanding.</p>
+                <span class="study-meta">Python · Public repository</span>
+              </a>
+              <a class="study" href="https://github.com/homerquan/Worldlet" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">iv.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>Worldlet</h4>
+                <p>A nano world-model prototype built to test action-conditioned environment learning.</p>
+                <span class="study-meta">Python · Public repository</span>
+              </a>
+              <a class="study" href="https://github.com/homerquan/GomokuBench" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">v.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>GomokuBench</h4>
+                <p>A benchmark for evaluating language models on Gomoku rules, legal moves, and strategy.</p>
+                <span class="study-meta">Python · Public repository</span>
+              </a>
+              <a class="study" href="https://huggingface.co/homerquan/mn-context-engine-model-v-Q4_K_M" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">vi.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>MN Context Engine</h4>
+                <p>An automatic context-compression model for distilling long-running AI workflow history into compact, reusable working context.</p>
+                <span class="study-meta">Hugging Face · Experimental model</span>
+              </a>
+              <a class="study" href="https://huggingface.co/homerquan/DrugClip" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">vii.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>DrugCLIP</h4>
+                <p>A dual-encoder multimodal model aligning natural-language therapeutic intent with three-dimensional molecular structures.</p>
+                <span class="study-meta">Hugging Face · Multimodal model</span>
+              </a>
+              <a class="study" href="https://huggingface.co/homerquan/sp8ceai-lora-adapter" target="_blank" rel="noopener noreferrer">
+                <span class="study-number">viii.</span><span class="study-arrow" aria-hidden="true">↗</span>
+                <h4>SOP Generative Model</h4>
+                <p>An experimental generative model for interpreting standard operating procedures and producing structured operational workflow content.</p>
+                <span class="study-meta">Hugging Face · LoRA adapter</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="night-section" id="epilogue">
+        <div class="epilogue shell">
+          <span class="chapter-label">Epilogue, for now</span>
+          <h2>The voyage continues—and returns home.</h2>
+          <p>There remain questions worth pursuing about human agency, capable machines, and the intelligence we choose to build together. Then there is dinner, family, and life beyond the screen. Both belong to the story.</p>
+          <a class="letter-link" href="mailto:homerquan@gmail.com">Write to homerquan@gmail.com</a>
+          <div class="socials" aria-label="Elsewhere on the internet">
+            <a href="https://github.com/homerquan" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://huggingface.co/homerquan" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+            <a href="https://www.linkedin.com/in/homerquan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.mirrorneuron.io" target="_blank" rel="noopener noreferrer">MirrorNeuron</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+  </div>
 </body>
 
 </html>

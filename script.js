@@ -26,10 +26,13 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 60;
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
 renderer.setSize(width, height);
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x050b09, 0);
 container.appendChild(renderer.domElement);
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 //
 // === Particle + Morphing Parameters ===
@@ -190,7 +193,8 @@ function loadAllModels(onModelsLoaded) {
       }
 
       // Merge all mesh geometries into one buffer
-      const merged = BufferGeometryUtils.mergeBufferGeometries(geoms, false);
+      const mergeGeometries = BufferGeometryUtils.mergeGeometries || BufferGeometryUtils.mergeBufferGeometries;
+      const merged = mergeGeometries(geoms, false);
       merged.computeVertexNormals();
       merged.computeBoundingBox();
 
@@ -247,11 +251,16 @@ loadAllModels(() => {
   particles = new THREE.Points(geometry, material);
   scene.add(particles);
 
-  // Begin in "toModel" state
-  state = 'toModel';
-  stateStartTime = clock.getElapsedTime();
-
-  animate();
+  if (reduceMotion) {
+    positions.set(modelPositions);
+    geometry.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+  } else {
+    // Begin in "toModel" state
+    state = 'toModel';
+    stateStartTime = clock.getElapsedTime();
+    animate();
+  }
 });
 
 //
@@ -491,5 +500,9 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  if (reduceMotion) {
+    renderer.render(scene, camera);
+  }
 });
